@@ -1,10 +1,18 @@
-package com.example.first_project;
+package com.example.first_project.model;
 
 public class Product {
+    private static Long INDEX = 0L;
     private Long id;
     private String name;
     private Double price;
     private Integer quantity;
+
+    public Product(String name, Double price, Integer quantity) {
+        this.id = ++INDEX;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     public Product(Long id, String name, Double price, Integer quantity) {
         this.id = id;
