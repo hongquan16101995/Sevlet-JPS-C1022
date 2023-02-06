@@ -14,7 +14,7 @@ import java.io.IOException;
 //annotation @WebServlet: dùng để đánh dấu đây là 1 Servlet, được quản lý bới ServletContainer
 //name: đặt tên cho Servlet để quản lý
 //value hoặc urlPattern: dùng để định danh đường dẫn cho Servlet
-@WebServlet(name = "ProductServlet", value = "/products")
+@WebServlet(name = "ProductServlet", urlPatterns = {"/products"})
 public class ProductServlet extends HttpServlet {
 
     //tạo đối tượng Service để thao tác với cấu trúc dữ liệu lưu đối tượng

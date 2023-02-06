@@ -24,9 +24,9 @@
         <th colspan="2">Action</th>
     </tr>
 <%--    dùng c:forEach để render dữ liệu của list--%>
-    <c:forEach var="p" items="${products}">
+    <c:forEach var="p" items="${products}" varStatus="status">
         <tr>
-            <td>${p.id}</td>
+            <td>${status.index + 1}</td>
             <td>${p.name}</td>
             <td>${p.price}</td>
             <td>${p.quantity}</td>
