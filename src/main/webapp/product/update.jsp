@@ -29,6 +29,14 @@
             <td><input type="text" name="quantity" id="quantity" value="${product.quantity}"></td>
         </tr>
         <tr>
+            <td><label for="category">Category:</label></td>
+            <td><select name="category" id="category">
+                <c:forEach items="${categories}" var="c">
+                    <option value="${c.id}">${c.name}</option>
+                </c:forEach>
+            </select></td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <button type="submit">Update</button>
                 <a href="/products" style="text-decoration: none">

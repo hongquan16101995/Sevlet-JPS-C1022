@@ -1,6 +1,7 @@
 package com.example.first_project.controller;
 
 import com.example.first_project.model.Product;
+import com.example.first_project.service.CategoryService;
 import com.example.first_project.service.ProductService;
 
 import javax.servlet.RequestDispatcher;
@@ -19,9 +20,11 @@ public class ProductServlet extends HttpServlet {
 
     //tạo đối tượng Service để thao tác với cấu trúc dữ liệu lưu đối tượng
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     public ProductServlet() {
         productService = new ProductService();
+        categoryService = new CategoryService();
     }
 
     @Override
@@ -40,6 +43,9 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "detail":
                 detailProduct(request, response);
+                break;
+            case "create":
+                createForm(request, response);
                 break;
             case "update":
                 updateForm(request, response);
@@ -71,7 +77,7 @@ public class ProductServlet extends HttpServlet {
 
     //hiển thị tất cả sản phẩm
     private void displayProductList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("product/list.jsp");
         request.setAttribute("products", productService.findAll());
         rd.forward(request, response);
     }
@@ -79,27 +85,37 @@ public class ProductServlet extends HttpServlet {
     //hiển thị chi tiết 1 sản phẩm
     private void detailProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("product/detail.jsp");
         request.setAttribute("product", productService.findById(id));
         rd.forward(request, response);
     }
 
     //mở form update với giá trị thuộc tính của sản phẩm tương ứng
-    private void updateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        RequestDispatcher rd = request.getRequestDispatcher("update.jsp");
-        request.setAttribute("product", productService.findById(id));
+    private void createForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("product/create.jsp");
+        request.setAttribute("categories", categoryService.findAll());
         rd.forward(request, response);
     }
+
 
     //nhận dữ liệu của tạo mới
     private void create(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         Double price = Double.parseDouble(request.getParameter("price"));
         Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-        productService.createProduct(new Product(name, price, quantity));
+        Long categoryId = Long.parseLong(request.getParameter("category"));
+        productService.createProduct(new Product(name, price, quantity, categoryService.findById(categoryId)));
         //xử lý lỗi duplicate dữ liệu trong khi tạo hoặc sửa: điều hướng với Servlet tương ứng
         response.sendRedirect("/products");
+    }
+
+    //mở form update với giá trị thuộc tính của sản phẩm tương ứng
+    private void updateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        RequestDispatcher rd = request.getRequestDispatcher("product/update.jsp");
+        request.setAttribute("product", productService.findById(id));
+        request.setAttribute("categories", categoryService.findAll());
+        rd.forward(request, response);
     }
 
     //nhận dữ liệu của chỉnh sửa thông tin sản phẩm theo id
@@ -108,7 +124,8 @@ public class ProductServlet extends HttpServlet {
         String name = request.getParameter("name");
         Double price = Double.parseDouble(request.getParameter("price"));
         Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-        productService.updateProduct(new Product(id, name, price, quantity));
+        Long categoryId = Long.parseLong(request.getParameter("category"));
+        productService.updateProduct(new Product(id, name, price, quantity, categoryService.findById(categoryId)));
         response.sendRedirect("/products");
     }
 

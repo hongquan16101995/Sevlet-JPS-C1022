@@ -14,13 +14,15 @@
 </head>
 <body>
 <h1>List Product</h1>
-<a href="create.jsp">Create new product</a>
+<a href="/products?action=create">Create new product</a>
+<a href="/categories">List category</a>
 <table>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Category</th>
         <th colspan="2">Action</th>
     </tr>
 <%--    dùng c:forEach để render dữ liệu của list--%>
@@ -30,6 +32,7 @@
             <td>${p.name}</td>
             <td>${p.price}</td>
             <td>${p.quantity}</td>
+            <td>${p.category.name}</td>
             <td><a href="/products?action=update&id=${p.id}">
                 <button>Update</button>
             </a></td>
