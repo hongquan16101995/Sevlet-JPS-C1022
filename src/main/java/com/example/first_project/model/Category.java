@@ -3,7 +3,7 @@ package com.example.first_project.model;
 public class Category {
     private Long id;
     private String name;
-    private Boolean status;
+    private final Boolean status;
 
     public Category(String name) {
         this.name = name;
@@ -34,9 +34,5 @@ public class Category {
 
     public Boolean getStatus() {
         return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 }

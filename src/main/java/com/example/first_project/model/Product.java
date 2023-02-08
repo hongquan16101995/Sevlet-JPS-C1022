@@ -3,8 +3,8 @@ package com.example.first_project.model;
 public class Product {
     private Long id;
     private String name;
-    private Double price;
-    private Integer quantity;
+    private final Double price;
+    private final Integer quantity;
     private Category category;
 
     public Product(String name, Double price, Integer quantity, Category category) {
@@ -42,16 +42,8 @@ public class Product {
         return price;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public Integer getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public Category getCategory() {

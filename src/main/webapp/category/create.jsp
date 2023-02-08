@@ -14,32 +14,16 @@
 <body>
 <%--form tạo mới sản phẩm, action tương ứng không kèm id--%>
 <h1>Create form</h1>
-<form action="products?action=create" method="post">
+<form action="/categories?action=create" method="post">
     <table>
         <tr>
             <td><label for="name">Name:</label></td>
             <td><input type="text" name="name" id="name"></td>
         </tr>
         <tr>
-            <td><label for="price">Price:</label></td>
-            <td><input type="text" name="price" id="price"></td>
-        </tr>
-        <tr>
-            <td><label for="quantity">Quantity:</label></td>
-            <td><input type="text" name="quantity" id="quantity"></td>
-        </tr>
-        <tr>
-            <td><label for="category">Category:</label></td>
-            <td><select name="category" id="category">
-                <c:forEach items="${categories}" var="c">
-                    <option value="${c.id}">${c.name}</option>
-                </c:forEach>
-            </select></td>
-        </tr>
-        <tr>
             <td colspan="2">
                 <button type="submit">Create</button>
-                <a href="/products" style="text-decoration: none">
+                <a href="/categories" style="text-decoration: none">
                     <button type="button">Back to home</button>
                 </a>
             </td>

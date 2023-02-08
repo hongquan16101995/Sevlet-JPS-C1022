@@ -32,7 +32,7 @@ public class ProductDAO {
         //tạo đối tượng Statement: hỗ trợ truy vấn câu truy vấn tĩnh, không có tham số
         try (Statement statement = connection.createStatement();
              //tập hợp kết quả trả về được hứng bởi ResultSet
-             ResultSet resultSet = statement.executeQuery(SELECT_ALL_PRODUCT);) {
+             ResultSet resultSet = statement.executeQuery(SELECT_ALL_PRODUCT)) {
             while (resultSet.next()) {
                 Category category = categoryService.findById(resultSet.getLong(5));
                 products.add(new Product(resultSet.getLong(1),
@@ -51,7 +51,7 @@ public class ProductDAO {
     public Product findById(Long id) {
         Product product = null;
         //tạo đối tượng PreparedStatement: hỗ trợ thao tác với câu lệnh truy vấn động, có tham số
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_ID);) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_ID)) {
             //thêm tham số cho câu truy vấn với các hàm set giá trị tương ứng
             preparedStatement.setLong(1, id);
             //executeQuery: truy vấn đọc giữ liệu

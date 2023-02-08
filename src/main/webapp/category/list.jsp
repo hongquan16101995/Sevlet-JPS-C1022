@@ -13,30 +13,24 @@
     <title>Title</title>
 </head>
 <body>
-<h1>List Product</h1>
-<a href="/products?action=create">Create new product</a>
-<a href="/categories">List category</a>
+<h1>List Category</h1>
+<a href="/categories?action=create"><button>Create new category</button></a>
+<a href="/products"><button>List product</button></a>
 <table>
     <tr>
-        <th>ID</th>
+        <th>STT</th>
         <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Category</th>
         <th colspan="2">Action</th>
     </tr>
 <%--    dùng c:forEach để render dữ liệu của list--%>
-    <c:forEach var="p" items="${products}" varStatus="status">
+    <c:forEach var="c" items="${categories}" varStatus="status">
         <tr>
             <td>${status.index + 1}</td>
-            <td>${p.name}</td>
-            <td>${p.price}</td>
-            <td>${p.quantity}</td>
-            <td>${p.category.name}</td>
-            <td><a href="/products?action=update&id=${p.id}">
+            <td>${c.name}</td>
+            <td><a href="/categories?action=update&id=${c.id}">
                 <button>Update</button>
             </a></td>
-            <td><a href="/products?action=delete&id=${p.id}">
+            <td><a href="/categories?action=delete&id=${c.id}">
                 <button>Delete</button>
             </a></td>
         </tr>

@@ -14,8 +14,12 @@
 </head>
 <body>
 <h1>List Product</h1>
-<a href="/products?action=create">Create new product</a>
-<a href="/categories">List category</a>
+<a href="/products?action=create">
+    <button>Create new product</button>
+</a>
+<a href="/categories">
+    <button>List category</button>
+</a>
 <table>
     <tr>
         <th>ID</th>
@@ -25,7 +29,7 @@
         <th>Category</th>
         <th colspan="2">Action</th>
     </tr>
-<%--    dùng c:forEach để render dữ liệu của list--%>
+    <%--    dùng c:forEach để render dữ liệu của list--%>
     <c:forEach var="p" items="${products}" varStatus="status">
         <tr>
             <td>${status.index + 1}</td>
